@@ -1,0 +1,92 @@
+.container {
+    padding-top: 4%;
+    padding-bottom: 3%;}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.upload-section {
+    background-color: #ffffff;
+}
+
+#split-button {
+    background-color: #e74c3c;
+    color: white;
+    border: 1px solid white;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+#split-button:hover {
+    background-color: #e74c3c;
+    color: white;
+    transform: scale(1.05);
+}
+
+#download-link {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #218838;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+#download-link:hover {
+    background-color: #218838;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+/* Styles for the step cards */
+.step-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    height: 250px;
+    /* Set a fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.step-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.step-number {
+    font-size: 3rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.card-body p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #000;
+}
+
+.text-secondary {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.icon {
+    margin-bottom: 15px;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+}
+
