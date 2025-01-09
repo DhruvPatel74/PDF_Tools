@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(error => console.error('Error loading navbar:', error));
   });
 
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const fileInput = document.getElementById("pdf-files");
     const mergeButton = document.getElementById("merge-button");
     const resultSection = document.getElementById("result-section");
@@ -33,31 +33,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             const mergedPdf = await mergePDFs(files);
-            const pdfBlob = new Blob([mergedPdf], { type: "application/pdf" });
-            const pdfUrl = URL.createObjectURL(pdfBlob);
+            if (mergedPdf) {
+                const pdfBlob = new Blob([mergedPdf], { type: "application/pdf" });
+                const pdfUrl = URL.createObjectURL(pdfBlob);
 
-            downloadLink.href = pdfUrl;
-            downloadLink.download = "merged.pdf";
-            resultSection.classList.remove("d-none");
+                downloadLink.href = pdfUrl;
+                downloadLink.download = "merged.pdf";
+                resultSection.classList.remove("d-none");
+            }
 
-            pdfFileInput.value = "";
+            fileInput.value = ""; // Reset input for new selection
         } catch (error) {
             console.error("Error merging PDFs:", error);
-            alert("An error occurred while merging the PDFs. Please try again.");
+            alert(`An error occurred while merging the PDFs: ${error.message || "Unknown error"}`);
         }
     });
 });
 
 async function mergePDFs(files) {
-    const { PDFDocument } = PDFLib;
-    const mergedPdf = await PDFDocument.create();
+    try {
+        const { PDFDocument } = PDFLib;
+        const mergedPdf = await PDFDocument.create();
 
-    for (const file of files) {
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await PDFDocument.load(arrayBuffer);
-        const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-        copiedPages.forEach((page) => mergedPdf.addPage(page));
+        for (const file of files) {
+            const arrayBuffer = await file.arrayBuffer();
+
+            if (!arrayBuffer || arrayBuffer.byteLength === 0) {
+                throw new Error("Invalid PDF file detected");
+            }
+
+            const pdf = await PDFDocument.load(arrayBuffer);
+            const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+            copiedPages.forEach((page) => mergedPdf.addPage(page));
+        }
+
+        return await mergedPdf.save();
+    } catch (error) {
+        console.error("Error loading or merging PDFs:", error);
+        throw new Error("Error during PDF merging process.");
     }
-
-    return await mergedPdf.save();
 }
