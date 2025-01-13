@@ -1,6 +1,6 @@
 // JavaScript to load the navbar HTML into the page
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('/header')
+    fetch('/includes/header.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('navbar-container').innerHTML = data;
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   document.addEventListener('DOMContentLoaded', function() {
-    fetch('/footer')
+    fetch('/includes/footer.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('footer-container').innerHTML = data;

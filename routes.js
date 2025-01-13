@@ -9,15 +9,8 @@ router.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-router.get("/header", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/includes/header.html"));
-});
-
 // Routes
 // Basic route to serve HTML pages
-router.get("/footer", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/includes/footer.html"));
-});
 
 router.get("/adminpanel", (req, res) => {
   res.sendFile(path.join(__dirname, "public/pages/adminpanel.html"));
