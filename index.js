@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 document.getElementById("exploreBtn").onclick = function () {
-    window.location.href = "/alltools";
+    window.location.href = "/pages/alltools.html";
   };
   
 
